@@ -4,17 +4,17 @@
         
             require_once('../api/db_connect.php');
             
-            $id=isset($_GET['idF'])?$_GET['idF']:0;
+            $idUser=isset($_GET['idUser'])?$_GET['idUser']:0;
 
-            $requete="delete from candidat where idElecteurF=?";
+            $requete="delete from user where idUser=?";
 
             $resultat=mysqli_prepare($conn,$requete);
 
-            mysqli_stmt_bind_param($resultat, "i", $id);
+            mysqli_stmt_bind_param($resultat, "i", $idUser);
             
             $resultat->execute();
             
-            header('location:candidat.php');   
+            header('location:utilisateur.php');   
             
      }else {
                 header('location:login.php');

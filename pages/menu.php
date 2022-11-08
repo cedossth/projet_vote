@@ -1,21 +1,25 @@
-<nav class="navbar navbar-expand-lg navbar-dark indigo navbar-fixed-top">
-    <div class="collapse navbar-collapse" id="navbarText">
+<?php
+    //require_once('identifier.php');
+?>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
         <div class="navbar-header">
             <a href="../index.php" class="navbar-brand">Accueil</a>
         </div>
-        <ul class="nav navbar-nav mr-auto">
+        <ul class="nav navbar-nav">
             <li><a href="candidat.php"><i class="fa fa-vcard"></i>&nbsp Les candidats</a></li>
 			<?php if ($_SESSION['user']['idProfilF']==1) {?>
 					
 				<li><a href="utilisateur.php"><i class="fa fa-users"></i>&nbsp Les utilisateurs</a></li>
-                <li class="scrolling"><a href="#">Circonscriptions &ensp;</a>
-                    <ul class="under">
+                <li id="lien"><a href="#"><i class="fa fa-building"></i>&nbsp Circonscriptions<span class="caret"></span></a>
+                    <ul id="menu_deroulante" class="scrolling" hidden>
                         <li><a href="bureau.php">bureau</a></li>
                         <li><a href="commune.php">commune</a></li>
                         <li><a href="departement.php">departement</a></li>
                         <li><a href="lieu.php">lieu</a></li>
                         <li><a href="region.php">region</a></li>
                     </ul>
+                </li>
             </li>
 			<?php }?>
             <li><a href="resultat.php"><i class="fa fa-vcard"></i>&nbsp Les resultats</a></li>
@@ -40,3 +44,16 @@
 		</ul>
     </div>
 </nav>
+
+<script> 
+    var lien=document.getElementById("lien");
+    var men=document.getElementById("menu_deroulante");
+    lien.onmouseover=function(){
+        men.removeAttribute('hidden');
+    }
+    lien.onmouseout=function(){
+        men.setAttribute('hidden','hidden');
+    }
+    
+
+</script>

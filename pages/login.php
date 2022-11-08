@@ -7,7 +7,7 @@ else {
 }
 session_destroy();
 ?>
-<! DOCTYPE HTML>
+<!DOCTYPE HTML>
 <HTML>
 <head>
     <meta charset="utf-8">
@@ -30,7 +30,7 @@ session_destroy();
 
                 <div class="form-group">
                     <label for="login">Login :</label>
-                    <input type="text" name="login" placeholder="Login"
+                    <input type="text" name="login" placeholder="entrer votre mail"
                            class="form-control" autocomplete="off"/>
                 </div>
 
@@ -45,11 +45,11 @@ session_destroy();
                     Se connecter
                 </button>
                 <p class="text-right">
-                    <a href="InitialiserPwd.php">Mot de passe Oublié</a>
+                    <a href="initialiserPwd.php">Mot de passe Oublié</a>
 
                     &nbsp &nbsp
 
-                    <a href="nouvelUtilisateur.php">Créer un compte</a>
+                    <a href="nouveauUtilisateur.php">Créer un compte</a>
                 </p>
             </form>
         </div>

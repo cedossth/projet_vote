@@ -1,17 +1,9 @@
 <?php
     require_once('identifier.php');
     require_once("../api/db_connect.php");
-    
-    /*
-    if(isset($_GET['nomF']))
-        $nomf=$_GET['nomF'];
-    else
-        $nomf="";
-    */
 
-    $requete="select * from user,electeurs,candidat where idUser=idUser and idElecteur=idElecteurF";
+    $requete="select * from user,electeurs,candidat where idUserF=idUser and idElecteur=idElecteurF";
 
-    /*$resultatC=$conn->query($requete);*/
     $resultatC=mysqli_query($conn,$requete);
 ?>
 <!DOCTYPE HTML>
@@ -69,12 +61,12 @@
                                     
                                      <?php if ($_SESSION['user']['idProfilF']== 1) {?>
                                         <td>
-                                            <a href="editerCandidat.php?idF=<?php echo $candidat['idCandidat'] ?>">
+                                            <a href="editerCandidat.php?idF=<?php echo $candidat['idElecteurF'] ?>">
                                                 <span class="glyphicon glyphicon-edit"></span>
                                             </a>
                                             &nbsp;
-                                            <a onclick="return confirm('Etes vous sur de vouloir supprimer la filière')"
-                                                href="supprimerCandidat.php?idF=<?php echo $candidat['idCandidat'] ?>">
+                                            <a onclick="return confirm('Etes vous sur de vouloir supprimer le candidat')"
+                                                href="supprimerCandidat.php?idF=<?php echo $candidat['idElecteurF'] ?>">
                                                     <span class="glyphicon glyphicon-trash"></span>
                                             </a>
                                         </td>
