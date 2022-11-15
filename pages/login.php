@@ -15,10 +15,10 @@ session_destroy();
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../css/monstyle.css">
 </head>
-<body style="background-color:#94bbe9">
-<div class="container col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
+<body style="background-image:url('../vote_en_ligne.webp');background-size: cover;">
+<div class="container" style="margin:auto; width:40%; margin-top:50px;">
     <div class="panel panel-primary margetop60">
-        <div class="panel-heading">Se connecter :</div>
+        <div class="panel-heading">Se connecter</div>
         <div class="panel-body">
             <form method="post" action="seConnecter.php" class="form">
 
@@ -30,14 +30,13 @@ session_destroy();
 
                 <div class="form-group">
                     <label for="login">Login :</label>
-                    <input type="text" name="login" placeholder="entrer votre mail"
-                           class="form-control" autocomplete="off"/>
+                    <input type="text" name="login" placeholder="entrer votre mail" class="form-control" autocomplete="off"/>
                 </div>
 
                 <div class="form-group">
                     <label for="pwd">Mot de passe :</label>
                     <input type="password" name="pwd"
-                           placeholder="Mot de passe" class="form-control"/>
+                           placeholder="Mot de passe" class="form-control" autocomplete="off"/>
                 </div>
 
                 <button type="submit" class="btn btn-success">
@@ -46,9 +45,7 @@ session_destroy();
                 </button>
                 <p class="text-right">
                     <a href="initialiserPwd.php">Mot de passe Oublié</a>
-
                     &nbsp &nbsp
-
                     <a href="nouveauUtilisateur.php">Créer un compte</a>
                 </p>
             </form>

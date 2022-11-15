@@ -2,7 +2,7 @@
     require_once('identifier.php');
     require_once("../api/db_connect.php");
 
-    $requete="select * from lieu,commune where idCommune=idCommuneF";
+    $requete="select * from lieu,bureau where idLieu=idLieuF";
 
     $resultatC=mysqli_query($conn,$requete);
 ?>
@@ -12,7 +12,7 @@
 <head>
     <meta charset="utf-8"/>
 
-    <title> Nouveau lieu </title>
+    <title> Nouveau bureau </title>
     <link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../css/monstyle.css">
@@ -22,12 +22,12 @@
         <?php include("menu.php"); ?>
         <div class="panel margetop60">
             <div class="col-md-4 offset-5 text-center">
-                <a href="lieu.php" class="btn btn-primary btn-sm">NOUVEAU LIEU</a>
+                <a href="bureau.php" class="btn btn-primary btn-sm">NOUVEAU BUREAU</a>
             </div>
         </div>
         <div class="container">
             <div class="panel panel-success margetop60">
-                <div class="panel-heading">Liste des lieu</div>
+                <div class="panel-heading">Liste des bureaux</div>
             </div>
             <div class="panel panel-info">
                 <div class="panel-body">
@@ -35,17 +35,17 @@
                         <thead>
                             <tr>
                                 <th>#</th>
+                                <th>BUREAU</th>
                                 <th>LIEU</th>
-                                <th>COMMUNE</th>
                             </tr>
                         </thead>
 
                         <tbody>
                             <?php while($lieu=mysqli_fetch_array($resultatC, MYSQLI_ASSOC)){ ?>
                                 <tr>
-                                    <td><?php echo $lieu['idLieu'] ?> </td>
+                                    <td><?php echo $lieu['idBureau'] ?> </td>
+                                    <td><?php echo $lieu['codeB'] ?> </td>
                                     <td><?php echo $lieu['nomL'] ?> </td>
-                                    <td><?php echo $lieu['nomC'] ?> </td>
                                 </tr>
                             <?PHP } ?>
                         </tbody>

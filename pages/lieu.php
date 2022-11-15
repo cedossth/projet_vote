@@ -3,24 +3,49 @@ require_once('identifier.php');
 require_once("../api/db_connect.php");
 require_once("../les_fonctions/fonctions.php");
 
-$dep=liste_depart();
+function get_option($d){
+    global $conn;
+    $requetes="select * from departement";
+    $resultats=mysqli_query($conn,$requetes);
+    $options='';
+    foreach ($resultats as $result){
+        if ($d==$result['idDepartement']){
+            $options.='<option value="'. $result['idDepartement'] .'" selected>'.$result['nomD'].'</option>';
+        }else{
+            $options.='<option value="'. $result['idDepartement'] .'">'.$result['nomD'].'</option>';
+        }
+    }
+    return $options;
+}
 
-
-if (isset($_POST['commune'])){
-    $com=$_POST['commune'];
-    $requete="select * from commune,departement where idDepartF=idDepartement and idDepartement=$com";
-    $resultat=mysqli_query($conn,$requete);
+if(isset($_GET['departement'])){
+    $dep=$_GET['departement'];
+    $requete="select * from commune,departement where idDepartF=idDepartement and idDepartement=$dep";
 }else{
+    $dep='';
     $requete="select * from commune,departement where idDepartF=idDepartement";
-    $resultat=mysqli_query($conn,$requete);
+}
+$resultat=mysqli_query($conn,$requete);
+
+if ( isset($_POST['ajout'])) {
+
+    extract($_POST);
+    
+    if (empty($validationErrors)) {
+        
+        $requete=mysqli_prepare($conn,"INSERT INTO lieu(nomL,idCommuneF) VALUES(?,?)");
+        mysqli_stmt_bind_param($requete, 'si', $n, $idF);
+        $n= $lieu;
+        $idF= $commune;
+        $requete->execute();
+           
+        $success_msg = "Félicitation, le lieu est créé";
+
+    }
+
 }
 ?>
-<script>
-    function actualiser(){
-        var idi=this.options[this.selectedIndex].value; 
-        document.cookie="idit = " +idi;
-    }
-</script>
+
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -47,25 +72,22 @@ if (isset($_POST['commune'])){
 
             <div class="container col-md-6 col-md-offset-3">
 
-            <form class="form" method="post" action="#!">
+            <form class="form" method="get" action="">
 
                 <div class="row mt-4">
                     <div class="col-md-3">
-                        <label>DEPARTEMENT</label>
+                        <label for="dep">DEPARTEMENT</label>
                     </div>
                     <div class="col-md-8">
-                        <select name="departement" id="" class="form-control" required="required" onblur="document.getElementById('com').value=this.options[this.selectedIndex].value;">
+                        <select name="departement" id="dep" class="form-control" required="required" onchange="this.form.submit();">
                             <option value="" disabled selected>--- choisir un departement ---</option>
-                            <?php
-                                
-                                while ($result=mysqli_fetch_assoc($dep)){
-                                    ?>
-                                    <option value="<?= $result['idDepartement'] ?>"><?= $result['nomD'] ?></option>
-                                <?php  }
-                                ?>
+                            <?php echo get_option($dep);?>
                         </select>
                     </div>
                 </div>
+            </form>
+
+            <form class="form" method="post" action="#!">
                 <br>
                 <div class="row mt-4">
                     <div class="col-md-3">
@@ -84,8 +106,6 @@ if (isset($_POST['commune'])){
                     </div>
                 </div>
                 <br>
-            </form>
-            <form class="form" method="post" action="" onchange="this.form.submit();">
                 <div class="row mt-4">
                     <div class="col-md-3">
                         <label>LIEU</label>
@@ -101,7 +121,7 @@ if (isset($_POST['commune'])){
                     </div>
                 </div>
                 <br>
-                <input type="submit" class="btn btn-primary" value="Enregistrer">
+                <input type="submit" name="ajout" class="btn btn-primary" value="Enregistrer">
             </form>
             <br><br>
             <?php

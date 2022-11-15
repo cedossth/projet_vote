@@ -3,9 +3,6 @@
     require_once("../api/db_connect.php");
     $login=isset($_GET['login'])?$_GET['login']:"";
     
-    $size=isset($_GET['size'])?$_GET['size']:3;
-    $page=isset($_GET['page'])?$_GET['page']:1;
-    $offset=($page-1)*$size;
    
     $requeteUser="select * from user,electeurs where idUser=idUserF and nom like '%$login%'";
     $requeteCount="select count(*) countUser from user";
@@ -15,11 +12,7 @@
 
     $tabCount=$resultatCount->fetch_array();
     $nbrUser=$tabCount['countUser'];
-    $reste=$nbrUser % $size;   
-    if($reste===0) 
-        $nbrPage=$nbrUser/$size;   
-    else
-        $nbrPage=floor($nbrUser/$size)+1;  
+    
 ?>
 <!DOCTYPE HTML>
 <HTML>
@@ -94,17 +87,6 @@
                             <?php } ?>
                         </tbody>
                     </table>
-                    <div>
-                        <ul class="pagination">
-                            <?php for($i=1;$i<=$nbrPage;$i++){ ?>
-                                <li class="<?php if($i==$page) echo 'active' ?>"> 
-                                    <a href="utilisateur.php?page=<?php echo $i;?>&login=<?php echo $login ?>">
-                                    <?php echo $i; ?>
-                                    </a> 
-                                </li>
-                            <?php } ?>
-                        </ul>
-                    </div>
                 </div>
             </div>
         </div>

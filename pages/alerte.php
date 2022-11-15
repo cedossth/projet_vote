@@ -28,7 +28,7 @@
                 
                 <div class="alert alert-info">
                 
-                    <h4>Vous serez rediriger dans 3 secondes</h4>
+                    <h4>Vous serez rediriger dans 5 secondes</h4>
                     
                    	<?php  header("refresh:5;url=$url"); ?>
                    	

@@ -1,4 +1,3 @@
 <?php
-//mon index
-    header("location:pages/candidat.php");
+    header("location:pages/accueil.php");
 ?>

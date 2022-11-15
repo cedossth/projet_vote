@@ -6,11 +6,8 @@
     
     $pwd=isset($_POST['pwd'])?$_POST['pwd']:"";
 
-    $requete="select idUser,mail,idProfilF,etat 
-                from user where mail='$login' 
-                and mot_de_passe='$pwd'";
+    $requete="select idUser,mail,idProfilF,etat,a_vote from user where mail='$login' and mot_de_passe='$pwd'";
     
-    /*$resultat=$pdo->query($requete);*/
     $resultat=mysqli_query($conn,$requete);
     if($user=mysqli_fetch_array($resultat, MYSQLI_ASSOC)){
        

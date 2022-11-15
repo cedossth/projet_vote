@@ -3,7 +3,7 @@
 function rechercher_par_cni($cni){
     global $conn;
     $requete=mysqli_prepare($conn,"select * from electeurs where numCNI =?");
-    mysqli_stmt_bind_param($requete, "i", $cni);
+    mysqli_stmt_bind_param($requete, "s", $cni);
     $requete->execute();
     $requete->store_result();
     return $requete->num_rows();
@@ -35,10 +35,10 @@ function rechercher_user_par_email($email){
         return null;
 }
 
-function liste_depart(){
+/*function liste_depart(){
     global $conn;
     $requete="select * from departement";
     $resultatC=mysqli_query($conn,$requete);
     //$resultat=mysqli_fetch_assoc($resultatC);
     return $resultatC;
-}
+}*/

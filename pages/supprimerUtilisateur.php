@@ -14,6 +14,10 @@
             
             $resultat->execute();
             
+            $resultats=mysqli_prepare($conn,"delete from electeurs where idUserF not in (select idUser from user)");
+            
+            $resultats->execute();
+            
             header('location:utilisateur.php');   
             
      }else {

@@ -40,7 +40,7 @@
                         </div>
                         <div class="form-group">
                              <label for="prenom">CNI :</label>
-                            <input type="number" name="cni" placeholder="cni" class="form-control"
+                            <input type="text" name="cni" placeholder="cni" class="form-control"
                                    value="<?php echo $cni ?>"/>
                         </div>
 

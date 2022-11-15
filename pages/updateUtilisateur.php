@@ -17,7 +17,7 @@
 
     $resultats=mysqli_prepare($conn,"update electeurs set numCNI=? where idUserF=?");
 
-    mysqli_stmt_bind_param($resultats, "ii", $cni,$id);
+    mysqli_stmt_bind_param($resultats, "si", $cni,$id);
             
     $resultats->execute();
     
