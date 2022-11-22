@@ -54,7 +54,7 @@ if ( isset($_POST['ajout'])) {
     
     if (empty($validationErrors)) {
         
-        $requete=mysqli_prepare($conn,"UPDATE electeurs set idBureauF=? where idUserF=?");
+        $requete=mysqli_prepare($conn,"UPDATE user set idBureauF=? where idUser=?");
         mysqli_stmt_bind_param($requete, 'ii', $c, $idF);
         $c= $bureau;
         $idF= $iduser;
