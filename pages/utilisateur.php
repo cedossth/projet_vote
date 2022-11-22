@@ -4,7 +4,7 @@
     $login=isset($_GET['login'])?$_GET['login']:"";
     
    
-    $requeteUser="select * from user,electeurs where idUser=idUserF and nom like '%$login%'";
+    $requeteUser="select * from user where nom like '%$login%'";
     $requeteCount="select count(*) countUser from user";
    
     $resultatUser=mysqli_query($conn,$requeteUser);
@@ -51,7 +51,7 @@
                     <table class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th>nom</th> <th>prenom</th> <th>numero_cni</th> <th>Email</th> <th>date_naissance</th> <th>Role</th> <th>Actions</th>
+                                <th>nom</th> <th>prenom</th> <th>numero_cni</th> <th>Email</th> <th>date_naissance</th> <th>Etat</th> <th>Actions</th>
                             </tr>
                         </thead>
                         

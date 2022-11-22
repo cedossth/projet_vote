@@ -42,9 +42,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (empty($validationErrors)) {
         if (rechercher_par_cni($cni) == 0 && rechercher_par_email($email) == 0) {
-            $requete=mysqli_prepare($conn,"INSERT INTO user(nom,prenom,naissance,adresse,idProfilF,mot_de_passe,mail,etat) 
-                                        VALUES(?,?,?,?,?,?,?,?)");
-            mysqli_stmt_bind_param($requete, 'ssssissi', $n, $p, $naiss, $ad , $idP , $mdp , $ma , $et);
+            $requete=mysqli_prepare($conn,"INSERT INTO user(nom,prenom,naissance,adresse,idProfilF,mot_de_passe,mail,etat,numCNI,idBureauF) 
+                                        VALUES(?,?,?,?,?,?,?,?,?,?)");
+            mysqli_stmt_bind_param($requete, 'ssssissisi', $n, $p, $naiss, $ad , $idP , $mdp , $ma , $et , $num , $idB);
             $n= $nom;
             $p= $prenom;
             $naiss= $naissance;
@@ -53,18 +53,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $mdp= $pwd1;
             $ma= $email;
             $et= 0;
+            $num=$cni;
+            $idB=1;
 
             $requete->execute();
-            $i=mysqli_insert_id($conn);
-            $requete->close();
 
-            $requetes =mysqli_prepare($conn,"INSERT INTO electeurs(numCNI,idBureau,idUserF) VALUES(?,?,?)");
-            mysqli_stmt_bind_param($requetes, 'sii', $num, $idB , $idF);
-            $num= $cni;
-            $idB= 1;
-            $idF=$i;
-            $requetes->execute();
-            $requetes->close();
+            $requete->close();
 
             $success_msg = "Félicitation, votre compte est crée, mais temporairement inactif jusqu'a activation par l'admin";
         } else {
@@ -115,7 +109,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             <input type="text"
                    required="required"
-                   minlength="4"
                    title="Le prenom"
                    name="prenom"
                    placeholder="Taper votre prenom"
@@ -138,7 +131,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             <input type="text"
                    required="required"
-                   minlength="4"
                    title="L'adresse"
                    name="adresse"
                    placeholder="Taper votre adresse"
@@ -181,6 +173,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             <input type="text"
                    required="required"
+                   minlength="13"
                    name="cni"
                    placeholder="Taper votre numero cni"
                    autocomplete="off"

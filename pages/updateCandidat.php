@@ -7,7 +7,7 @@
 
     $nomp=isset($_POST['nomp'])?$_POST['nomp']:"";
 
-    $resultat=mysqli_prepare($conn,"update candidat set nomParti=? where idElecteurF=?");
+    $resultat=mysqli_prepare($conn,"update candidat set nomParti=? where idUserF=?");
 
     mysqli_stmt_bind_param($resultat, "si", $nomp,$id);
             

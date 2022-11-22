@@ -2,7 +2,7 @@
     require_once('identifier.php');
     require_once("../api/db_connect.php");
 
-    $requete="select * from user,electeurs,candidat where idUserF=idUser and idElecteur=idElecteurF";
+    $requete="select * from user,candidat where idUserF=idUser";
 
     $resultatC=mysqli_query($conn,$requete);
 ?>
@@ -61,12 +61,12 @@
                                     
                                      <?php if ($_SESSION['user']['idProfilF']== 1) {?>
                                         <td>
-                                            <a href="editerCandidat.php?idF=<?php echo $candidat['idElecteurF'] ?>">
+                                            <a href="editerCandidat.php?idF=<?php echo $candidat['idUserF'] ?>">
                                                 <span class="glyphicon glyphicon-edit"></span>
                                             </a>
                                             &nbsp;
                                             <a onclick="return confirm('Etes vous sur de vouloir supprimer le candidat')"
-                                                href="supprimerCandidat.php?idF=<?php echo $candidat['idElecteurF'] ?>">
+                                                href="supprimerCandidat.php?idF=<?php echo $candidat['idUserF'] ?>">
                                                     <span class="glyphicon glyphicon-trash"></span>
                                             </a>
                                         </td>

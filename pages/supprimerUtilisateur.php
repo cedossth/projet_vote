@@ -14,7 +14,7 @@
             
             $resultat->execute();
             
-            $resultats=mysqli_prepare($conn,"delete from electeurs where idUserF not in (select idUser from user)");
+            $resultats=mysqli_prepare($conn,"delete from candidat where idUserF not in (select idUser from user)");
             
             $resultats->execute();
             

@@ -23,7 +23,7 @@
                 <li><a href="editerBureau.php"><i class="fa fa-edit"></i>&nbsp Changement bureau</a></li>
 			<?php }?>
             <li><a href="resultat.php"><i class="fa fa-bar-chart-o"></i>&nbsp Resultats</a></li>
-            <?php if ($_SESSION['user']['idProfilF']==2) {?>
+            <?php if ($_SESSION['user']['idProfilF']==2 && $_SESSION['user']['est_inscrit']==1) {?>
 				<li><a href="voter.php"><i class="fa fa-cubes"></i>&nbsp Voter</a></li>
                 <li><a href="modifierBureau.php"><i class="fa fa-cube"></i>&nbsp Bureau de vote</a></li>
             <?php }?>

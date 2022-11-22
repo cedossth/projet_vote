@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mar. 15 nov. 2022 à 00:42
+-- Généré le :  mar. 22 nov. 2022 à 15:31
 -- Version du serveur :  8.0.18
 -- Version de PHP :  7.3.12
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `bureau` (
   `idLieuF` int(11) DEFAULT NULL,
   PRIMARY KEY (`idBureau`),
   KEY `idLieuF` (`idLieuF`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `bureau`
@@ -43,7 +43,8 @@ CREATE TABLE IF NOT EXISTS `bureau` (
 
 INSERT INTO `bureau` (`idBureau`, `codeB`, `idLieuF`) VALUES
 (1, 1, 16),
-(2, 1, 15);
+(2, 1, 15),
+(3, 2, 15);
 
 -- --------------------------------------------------------
 
@@ -55,18 +56,19 @@ DROP TABLE IF EXISTS `candidat`;
 CREATE TABLE IF NOT EXISTS `candidat` (
   `idCandidat` int(11) NOT NULL AUTO_INCREMENT,
   `nomParti` varchar(20) NOT NULL,
-  `idElecteurF` int(11) DEFAULT NULL,
   `nombre_vote` int(11) NOT NULL DEFAULT '0',
+  `idUserF` int(11) NOT NULL,
   PRIMARY KEY (`idCandidat`),
-  KEY `idElecteurF` (`idElecteurF`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  KEY `idUserF` (`idUserF`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `candidat`
 --
 
-INSERT INTO `candidat` (`idCandidat`, `nomParti`, `idElecteurF`, `nombre_vote`) VALUES
-(1, 'mdc', 1, 5);
+INSERT INTO `candidat` (`idCandidat`, `nomParti`, `nombre_vote`, `idUserF`) VALUES
+(1, 'seth_parti', 6, 7),
+(3, 'seth_parti', 1, 10);
 
 -- --------------------------------------------------------
 
@@ -709,38 +711,6 @@ INSERT INTO `departement` (`idDepartement`, `nomD`, `idRegionF`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `electeurs`
---
-
-DROP TABLE IF EXISTS `electeurs`;
-CREATE TABLE IF NOT EXISTS `electeurs` (
-  `idElecteur` int(11) NOT NULL AUTO_INCREMENT,
-  `numCNI` varchar(20) NOT NULL,
-  `idBureau` int(11) DEFAULT NULL,
-  `idUserF` int(11) DEFAULT NULL,
-  PRIMARY KEY (`idElecteur`),
-  UNIQUE KEY `numCNI` (`numCNI`),
-  KEY `idUser` (`idUserF`),
-  KEY `idBureau` (`idBureau`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `electeurs`
---
-
-INSERT INTO `electeurs` (`idElecteur`, `numCNI`, `idBureau`, `idUserF`) VALUES
-(1, '12347', 1, 1),
-(8, '15672891', 1, 19),
-(3, '33365', 1, 5),
-(4, '13452', 1, 7),
-(5, '56832', 1, 9),
-(6, '2147483647', 1, 10),
-(7, '1234567890', 1, 12),
-(10, '2221569832502', 1, 22);
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `lieu`
 --
 
@@ -751,7 +721,7 @@ CREATE TABLE IF NOT EXISTS `lieu` (
   `idCommuneF` int(11) DEFAULT NULL,
   PRIMARY KEY (`idLieu`),
   KEY `idCommuneF` (`idCommuneF`)
-) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `lieu`
@@ -760,7 +730,8 @@ CREATE TABLE IF NOT EXISTS `lieu` (
 INSERT INTO `lieu` (`idLieu`, `nomL`, `idCommuneF`) VALUES
 (15, 'rooum', 4),
 (16, 'golf', 20),
-(17, 'pikmbao', 32);
+(17, 'pikmbao', 32),
+(18, 'sahm', 11);
 
 -- --------------------------------------------------------
 
@@ -834,23 +805,30 @@ CREATE TABLE IF NOT EXISTS `user` (
   `mail` varchar(40) NOT NULL,
   `etat` int(1) DEFAULT NULL,
   `a_vote` int(11) NOT NULL DEFAULT '0',
+  `est_inscrit` int(11) DEFAULT '0',
+  `numCNI` varchar(20) DEFAULT NULL,
+  `idBureauF` int(11) DEFAULT NULL,
+  `vote_pour` int(11) NOT NULL,
   PRIMARY KEY (`idUser`),
-  KEY `idProfilF` (`idProfilF`)
-) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+  KEY `idProfilF` (`idProfilF`),
+  KEY `idBureauF` (`idBureauF`),
+  KEY `vote_pour` (`vote_pour`)
+) ENGINE=MyISAM AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `user`
 --
 
-INSERT INTO `user` (`idUser`, `nom`, `prenom`, `naissance`, `adresse`, `idProfilF`, `mot_de_passe`, `mail`, `etat`, `a_vote`) VALUES
-(1, 'HOUANSOU', 'seth', '1999-09-23', 'thies', 1, 'passer', 'hnsseth@gmail.com', 1, 0),
-(9, 'houans', 'cedric', '1992-12-04', 'medina', 2, '0000', 'hnsced@gmail.com', 1, 1),
-(5, 'gaston', 'prince', '2014-09-12', 'mbour', 2, 'test1', 'princegast@gmail.com', 1, 1),
-(7, 'houansou', 'cedric', '1993-09-07', 'saly', 2, 'test123', 'mscoluwatogni.houansou@univ-thies.sn', 1, 1),
-(10, 'KANES', 'Aliou', '1997-09-05', 'thies', 2, 'aliou', 'aliou.ka@univ-thies.sn', 1, 1),
-(12, 'ghjkjhgh', 'ghjvbn', '2005-05-10', 'ouakam', 2, 'boss', 'azerty@gmail.com', 0, 0),
-(19, 'zannou', 'wens', '1991-12-03', 'ouakam', 2, 'test', 'non@gmail.com', 0, 0),
-(22, 'aboubacar', 'chancell', '1997-12-08', 'pointe', 2, 'passer', 'chanc@gmail.com', 0, 0);
+INSERT INTO `user` (`idUser`, `nom`, `prenom`, `naissance`, `adresse`, `idProfilF`, `mot_de_passe`, `mail`, `etat`, `a_vote`, `est_inscrit`, `numCNI`, `idBureauF`, `vote_pour`) VALUES
+(1, 'HOUANSOU', 'seth', '1999-09-23', 'thies', 1, 'passer', 'hnsseth@gmail.com', 1, 0, 0, '1234567890324', 3, 0),
+(9, 'houans', 'cedric', '1992-12-04', 'medina', 2, '0000', 'hnsced@gmail.com', 1, 1, 1, '1223445675432', 1, 7),
+(5, 'gaston', 'prince', '2014-09-12', 'mbour', 2, 'test1', 'princegast@gmail.com', 1, 1, 0, '1134445654324', 1, 7),
+(7, 'houansou', 'cedric', '1993-09-07', 'saly', 2, 'test123', 'mscoluwatogni.houansou@univ-thies.sn', 1, 1, 0, '1111123489076', 3, 7),
+(10, 'KA', 'Aliou', '1997-09-05', 'thies', 2, 'aliou', 'aliou.ka@univ-thies.sn', 1, 1, 0, '1233456678543', 1, 10),
+(12, 'ghjkjhgh', 'ghjvbn', '2005-05-10', 'ouakam', 2, 'boss', 'azerty@gmail.com', 1, 1, 1, '12345678888765', 1, 7),
+(19, 'zannou', 'wens', '1991-12-03', 'ouakam', 2, 'test', 'non@gmail.com', 1, 0, 1, '11122434354346', 3, 0),
+(22, 'aboubacar', 'chancell', '1997-12-08', 'pointe', 2, 'passer', 'chanc@gmail.com', 0, 0, 0, '111122233334565', 1, 0),
+(35, 'hounkanrin', 'frejus', '2005-03-15', 'dakar', 2, 'test', 'hkr@gmail.com', 0, 0, 0, '11234332567898', 1, 0);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

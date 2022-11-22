@@ -31,7 +31,7 @@
   function getCandidats()
   {
     global $conn;
-    $query = "SELECT * FROM candidat,electeurs,user where idUser=idUserF and idElecteur=idElecteurF";
+    $query = "SELECT * FROM candidat,user where idUser=idUserF";
     $response = array();
     $result = mysqli_query($conn, $query);
     while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))

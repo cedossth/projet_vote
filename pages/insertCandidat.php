@@ -5,7 +5,7 @@
     $nomp=isset($_POST['nomP'])?$_POST['nomP']:"";
     $id=isset($_POST['idE'])?$_POST['idE']:"";
     
-    $resultat=mysqli_prepare($conn,"insert into candidat(nomParti,idElecteurF) values(?,?)");
+    $resultat=mysqli_prepare($conn,"insert into candidat(nomParti,idUserF) values(?,?)");
     mysqli_stmt_bind_param($resultat, "si", $nomp,$id);
     $resultat->execute();
     

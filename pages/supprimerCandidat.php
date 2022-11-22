@@ -6,7 +6,7 @@
             
             $id=isset($_GET['idF'])?$_GET['idF']:0;
 
-            $requete="delete from candidat where idElecteurF=?";
+            $requete="delete from candidat where idUserF=?";
 
             $resultat=mysqli_prepare($conn,$requete);
 

@@ -9,17 +9,11 @@
 
     $cni=isset($_POST['cni'])?($_POST['cni']):"";
 
-    $resultat=mysqli_prepare($conn,"update user set mail=? where idUser=?");
+    $resultat=mysqli_prepare($conn,"update user set mail=?, numCNI=? where idUser=?");
 
-    mysqli_stmt_bind_param($resultat, "si", $login,$id);
+    mysqli_stmt_bind_param($resultat, "ssi", $login,$cni,$id);
             
     $resultat->execute();
-
-    $resultats=mysqli_prepare($conn,"update electeurs set numCNI=? where idUserF=?");
-
-    mysqli_stmt_bind_param($resultats, "si", $cni,$id);
-            
-    $resultats->execute();
     
     header('refresh:3;url=utilisateur.php');
 ?>

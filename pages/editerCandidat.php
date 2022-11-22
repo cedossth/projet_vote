@@ -4,7 +4,7 @@
 
     $id=isset($_GET['idF'])?$_GET['idF']:0;
 
-    $requete="select * from user,electeurs,candidat where idUser=idUserF and $id=idElecteur";
+    $requete="select * from user,candidat where idUser=idUserF and $id=idUser";
 
     $resultat=mysqli_query($conn,$requete);
     $utilisateur=$resultat->fetch_array();

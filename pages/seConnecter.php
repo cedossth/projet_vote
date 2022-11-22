@@ -6,7 +6,7 @@
     
     $pwd=isset($_POST['pwd'])?$_POST['pwd']:"";
 
-    $requete="select idUser,mail,idProfilF,etat,a_vote from user where mail='$login' and mot_de_passe='$pwd'";
+    $requete="select idUser,mail,idProfilF,etat,a_vote,est_inscrit from user where mail='$login' and mot_de_passe='$pwd'";
     
     $resultat=mysqli_query($conn,$requete);
     if($user=mysqli_fetch_array($resultat, MYSQLI_ASSOC)){
@@ -18,7 +18,7 @@
             
         }else{
             
-            $_SESSION['erreurLogin']="<strong>Erreur!!</strong> Votre compte est désactivé.<br> Veuillez contacter l'administrateur";
+            $_SESSION['erreurLogin']="<strong>Erreur!!</strong> Votre compte est temporairement désactivé.<br>";
             header('location:login.php');
         }
     }else{

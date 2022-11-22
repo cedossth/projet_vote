@@ -47,6 +47,8 @@ session_destroy();
                     <a href="initialiserPwd.php">Mot de passe Oublié</a>
                     &nbsp &nbsp
                     <a href="nouveauUtilisateur.php">Créer un compte</a>
+                    &nbsp &nbsp
+                    <a href="verifierInscription.php">Vérifier inscription</a>
                 </p>
             </form>
         </div>

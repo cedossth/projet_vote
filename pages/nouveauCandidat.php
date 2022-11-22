@@ -7,7 +7,7 @@
     $page=isset($_GET['page'])?$_GET['page']:1;
     $offset=($page-1)*$size;
    
-    $requeteUser="select * from user,electeurs where idUser=idUserF and nom like '%$login%'";
+    $requeteUser="select * from user where nom like '%$login%'";
     $requeteCount="select count(*) countUser from user";
    
     $resultatUser=mysqli_query($conn,$requeteUser);
@@ -89,14 +89,14 @@
                     <table class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th>idElecteur</th> <th>nom</th> <th>prenom</th> <th>numero_cni</th> <th>Email</th> <th>date_naissance</th> <th>Role</th>
+                                <th>idElecteur</th> <th>nom</th> <th>prenom</th> <th>numero_cni</th> <th>Email</th> <th>date_naissance</th> <th>Etat</th>
                             </tr>
                         </thead>
                         
                         <tbody>
                             <?php while($user=$resultatUser->fetch_assoc()){ ?>
                                 <tr class="<?php echo $user['etat']==1?'success':'danger'?>">
-                                    <td><?php echo $user['idElecteur'] ?> </td>
+                                    <td><?php echo $user['idUser'] ?> </td>
                                     <td><?php echo $user['nom'] ?> </td>
                                     <td><?php echo $user['prenom'] ?> </td>
                                     <td><?php echo $user['numCNI'] ?> </td>
